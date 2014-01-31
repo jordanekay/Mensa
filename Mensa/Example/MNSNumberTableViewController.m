@@ -30,10 +30,10 @@
     for (NSInteger i = 1; i <= COUNT; i++) {
         MNSNumber *number = [[MNSNumber alloc] initWithValue:i];
         [self.objects addObject:number];
-        if (number.isPrime) {
-            MNSPrimeFlag *flag = [[MNSPrimeFlag alloc] initWithNumber:number];
-            [self.objects addObject:flag];
-        }
+//        if (number.isPrime) {
+//            MNSPrimeFlag *flag = [[MNSPrimeFlag alloc] initWithNumber:number];
+//            [self.objects addObject:flag];
+//        }
     }
 }
 
