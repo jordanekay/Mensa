@@ -60,9 +60,9 @@ static NSString *cellIdentifier = @"MNSTableViewCell";
         // Note: Using content view is intentional
         CGSize size = [metricsCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         height = size.height;
-		if (self.tableView.separatorStyle != UITableViewCellSeparatorStyleNone) {
-			height += 1.0f;
-		}
+        if (self.tableView.separatorStyle != UITableViewCellSeparatorStyleNone) {
+            height += 1.0f;
+        }
     }
 
     return height;
