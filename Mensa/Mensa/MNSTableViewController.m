@@ -51,7 +51,7 @@ static NSString *cellIdentifier = @"MNSTableViewCell";
         metricsCell.frame = frame;
 
         // Set up the metrics cell using real populated content
-        [self.dataMediator useViewController:metricsCell.hostedViewController withObject:object];
+        //[self.dataMediator useViewController:metricsCell.hostedViewController withObject:object];
 
         // Force a layout
         [metricsCell layoutIfNeeded];
