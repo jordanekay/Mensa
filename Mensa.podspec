@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     'Jordan Kay' => 'jordanekay@mac.com'
   }
   s.source = {
-    :git => 'https://github.com/jordanekay/Mensa.git',
+    :git => 'https://github.com/ChandleWEi/Mensa.git',
     :tag => '0.8.2'
   }
   s.license = {
