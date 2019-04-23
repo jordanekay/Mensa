@@ -1,8 +1,8 @@
 //
-//  View.swift
+//  Controller.swift
 //  Mensa
 //
-//  Created by Jordan Kay on 3/27/19.
+//  Created by Jordan Kay on 4/10/19.
 //  Copyright © 2019 CultivR. All rights reserved.
 //
 

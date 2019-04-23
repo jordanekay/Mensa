@@ -1,9 +1,7 @@
 //
-//  Model.swift
+//  Mensa.swift
 //  Mensa
 //
-//  Created by Jordan Kay on 3/27/19.
-//  Copyright © 2019 Jordan Kay. All rights reserved.
+//  Created by Jordan Kay on 4/16/19.
+//  Copyright © 2019 CultivR. All rights reserved.
 //
-
-
