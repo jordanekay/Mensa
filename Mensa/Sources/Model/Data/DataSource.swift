@@ -18,4 +18,8 @@ extension DataSource {
     func item(at indexPath: SectionIndexPath) -> Item {
         return sections[indexPath.section][indexPath.row]
     }
+    
+    func header(for section: Int) -> Header? {
+        return sections[section].header
+    }
 }

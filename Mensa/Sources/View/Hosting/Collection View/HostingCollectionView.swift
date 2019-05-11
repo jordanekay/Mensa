@@ -27,4 +27,12 @@ extension HostingCollectionView: DataDisplaying {
     func register(_ hostingViewType: HostingView.Type, reuseIdentifier: String) {
         register(hostingViewType, forCellWithReuseIdentifier: reuseIdentifier)
     }
+    
+    func register(_ headerFooterViewType: HostingHeaderFooterView.Type, reuseIdentifier: String) {
+        return
+    }
+    
+    func register(_ supplementaryViewType: HostingSupplementaryView.Type, reuseIdentifier: String) {
+        register(supplementaryViewType, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
+    }
 }

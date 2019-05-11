@@ -36,7 +36,7 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let (identifier, itemMediator, item) = info(for: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier.value, for: indexPath) as! HostingView
-        let viewController = cell.viewController ?? hostContent(in: cell, for: item, with: identifier)
+        let viewController = cell.viewController ?? hostContent(in: cell, for: identifier)
         
         itemMediator.interface(viewController, item)
         return cell as! UITableViewCell
@@ -54,7 +54,7 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let (identifier, itemMediator, item) = info(for: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier.value, for: indexPath) as! HostingView
-        let viewController = cell.viewController ?? hostContent(in: cell, for: item, with: identifier)
+        let viewController = cell.viewController ?? hostContent(in: cell, for: identifier)
         
         itemMediator.interface(viewController, item)
         return cell as! UICollectionViewCell
@@ -63,16 +63,13 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            guard let identifier = headerIdentifier(for: indexPath.section) else { return (nil as UICollectionReusableView?)! }
+            guard let (identifier, itemMediator, header) = headerInfo(for: indexPath.section) else { return (nil as UICollectionReusableView?)! }
             
-            if !registeredSupplementaryViewIdentifiers.contains(identifier) {
-                let nib = self.nib(for: identifier)
-                collectionView.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier.value)
-                registeredSupplementaryViewIdentifiers.insert(identifier)
-            }
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier.value, for: indexPath) as! HostingView
+            let viewController = headerView.viewController ?? hostContent(in: headerView, for: identifier)
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier.value, for: indexPath)
-            return view
+            itemMediator.interface(viewController, header)
+            return headerView as! UICollectionReusableView
         default:
             return (nil as UICollectionReusableView?)!
         }
@@ -80,11 +77,13 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard let identifier = headerIdentifier(for: section) else { return .zero }
+        guard let (identifier, itemMediator, _) = headerInfo(for: section) else { return .zero }
         
         let height = headerHeightCache[section] ?? {
-            let nib = self.nib(for: identifier)
-            let view = nib.instantiate(withOwner: nil, options: nil).first as! UICollectionReusableView
+            let viewControllerType = viewControllerTypes[identifier]!
+            let viewType = self.viewType(for: viewControllerType)
+            let displayVariant = itemMediator.displayVariant
+            let view = viewType.hostedView(of: displayVariant)
             let height = view.bounds.height
             headerHeightCache[section] = height
             return height
@@ -135,12 +134,23 @@ private extension DataMediator {
         return (itemTypeVariantIdentifier, itemMediator, item)
     }
     
+    func headerInfo(for section: Int) -> (ItemTypeVariantIdentifier, ItemMediator, Header)? {
+        guard let header = dataSource!.header(for: section) else { return nil }
+        
+        let itemType = type(of: header)
+        let itemTypeIdentifier = ItemTypeIdentifier(itemType: itemType)
+        let displayVariant = dataInterface.displayVariant(for: header) ?? defaultDisplayVariants[itemTypeIdentifier] ?? Invariant()
+        let itemTypeVariantIdentifier = ItemTypeVariantIdentifier(itemTypeIdentifier: itemTypeIdentifier, variant: displayVariant)
+        let itemMediator = itemMediators[itemTypeVariantIdentifier]!
+        return (itemTypeVariantIdentifier, itemMediator, header)
+    }
+    
     func viewType(for viewControllerType: UIViewController.Type) -> NibLoadable.Type {
         let viewControllerName = String(describing: viewControllerType)
         let viewName = viewControllerName.replacingOccurrences(of: "Controller", with: "")
         return NSClassFromString("View.\(viewName)") as! NibLoadable.Type
     }
-    
+
     func headerIdentifier(for section: Int) -> ItemTypeVariantIdentifier? {
         guard let header = dataSource?.sections[section].header else { return nil }
         
@@ -148,14 +158,7 @@ private extension DataMediator {
         return .init(itemTypeIdentifier: headerTypeIdentifier, variant: Invariant())
     }
     
-    func nib(for identifier: ItemTypeVariantIdentifier) -> UINib {
-        let nibName = "\(identifier.value)View"
-        let viewClass: AnyClass = NSClassFromString("View.\(nibName)")!
-        let bundle = Bundle(for: viewClass)
-        return .init(nibName: nibName, bundle: bundle)
-    }
-    
-    func hostContent(in hostingView: HostingView, for item: Item, with identifier: ItemTypeVariantIdentifier) -> UIViewController {
+    func hostContent(in hostingView: HostingView, for identifier: ItemTypeVariantIdentifier) -> UIViewController {
         let viewControllerType = viewControllerTypes[identifier]!
         let viewController = viewControllerType.init()
         let viewType = self.viewType(for: viewControllerType)

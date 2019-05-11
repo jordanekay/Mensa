@@ -12,4 +12,6 @@ protocol DataDisplaying: UIScrollView {
     func reloadData()
     
     func register(_ hostingViewType: HostingView.Type, reuseIdentifier: String)
+    func register(_ headerFooterViewType: HostingHeaderFooterView.Type, reuseIdentifier: String)
+    func register(_ supplementaryViewType: HostingSupplementaryView.Type, reuseIdentifier: String)
 }

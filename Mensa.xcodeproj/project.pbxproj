@@ -13,6 +13,12 @@
 		176A254F226E967A0064488F /* ItemTypeVariantIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */; };
 		17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
 		17D4F2362283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
+		17D4F27A2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */; };
+		17D4F27B2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */; };
+		17D4F27D2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F27C2285E39400FDD335 /* HostingSupplementaryView.swift */; };
+		17D4F27E2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F27C2285E39400FDD335 /* HostingSupplementaryView.swift */; };
+		17D4F2802285E8F200FDD335 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F27F2285E8F200FDD335 /* ReusableView.swift */; };
+		17D4F2812285E8F200FDD335 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F27F2285E8F200FDD335 /* ReusableView.swift */; };
 		17DFC9E4225E6D4200871C7D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFC9E3225E6D4200871C7D /* Section.swift */; };
 		17DFC9E6225E6D8200871C7D /* SingleSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFC9E5225E6D8200871C7D /* SingleSectionDataSource.swift */; };
 		17DFC9F8225E7F2E00871C7D /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFC9E9225E7E8000871C7D /* Controller.swift */; };
@@ -52,6 +58,9 @@
 		1772ABBA1D188BA0007DC99F /* Mensa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mensa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1772ABBF1D188BA0007DC99F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17D4F2342283720D00FDD335 /* DataDisplayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayContext.swift; sourceTree = "<group>"; };
+		17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingHeaderFooterView.swift; sourceTree = "<group>"; };
+		17D4F27C2285E39400FDD335 /* HostingSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingSupplementaryView.swift; sourceTree = "<group>"; };
+		17D4F27F2285E8F200FDD335 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		17DFC9E3225E6D4200871C7D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		17DFC9E5225E6D8200871C7D /* SingleSectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSource.swift; sourceTree = "<group>"; };
 		17DFC9E9225E7E8000871C7D /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
@@ -153,6 +162,14 @@
 			path = Mensa;
 			sourceTree = "<group>";
 		};
+		17D4F2782285E37500FDD335 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				17D4F27F2285E8F200FDD335 /* ReusableView.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
 		17DFC9E2225E6D3100871C7D /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +204,7 @@
 			children = (
 				17DFCA23225ED97B00871C7D /* Hosting */,
 				17DFCA0F225EB99500871C7D /* Display */,
+				17D4F2782285E37500FDD335 /* Reusable */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,6 +252,7 @@
 			children = (
 				17DFCA40226113F100871C7D /* HostingTableView.swift */,
 				17DFCA25225ED98F00871C7D /* HostingTableViewCell.swift */,
+				17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */,
 			);
 			path = "Table View";
 			sourceTree = "<group>";
@@ -243,6 +262,7 @@
 			children = (
 				17F29F0B22825CEE009F5121 /* HostingCollectionView.swift */,
 				17F29F0F22825CF9009F5121 /* HostingCollectionViewCell.swift */,
+				17D4F27C2285E39400FDD335 /* HostingSupplementaryView.swift */,
 			);
 			path = "Collection View";
 			sourceTree = "<group>";
@@ -436,12 +456,15 @@
 				17DFCA2D225EDA8900871C7D /* DataMediator.swift in Sources */,
 				17F6A92C2266A3C100CBC866 /* HostingTableView.swift in Sources */,
 				17D4F2362283720D00FDD335 /* DataDisplayContext.swift in Sources */,
+				17D4F2812285E8F200FDD335 /* ReusableView.swift in Sources */,
+				17D4F27B2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */,
 				17DFC9FB225E7F3600871C7D /* DataSource.swift in Sources */,
 				17DFCA392260272200871C7D /* ItemMediator.swift in Sources */,
 				176A254A226E93100064488F /* ItemTypeIdentifier.swift in Sources */,
 				17DFCA1F225ECEA100871C7D /* DataDisplaying.swift in Sources */,
 				17DFC9F8225E7F2E00871C7D /* Controller.swift in Sources */,
 				17DFCA5D22669FB400871C7D /* SectionIndexPath.swift in Sources */,
+				17D4F27E2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */,
 				17F6A92D2266A3C100CBC866 /* HostingTableViewCell.swift in Sources */,
 				17DFCA442261166100871C7D /* DataInterfacing.swift in Sources */,
 				17DFC9FC225E7F3600871C7D /* SingleSectionDataSource.swift in Sources */,
@@ -456,8 +479,11 @@
 			files = (
 				17F29F0E22825CF1009F5121 /* HostingCollectionView.swift in Sources */,
 				17F6A92A2266A3C000CBC866 /* HostingTableViewCell.swift in Sources */,
+				17D4F27A2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */,
+				17D4F2802285E8F200FDD335 /* ReusableView.swift in Sources */,
 				17DFCA1D225ECE3A00871C7D /* DataDisplaying.swift in Sources */,
 				17DFCA02225EA56A00871C7D /* ItemDisplaying.swift in Sources */,
+				17D4F27D2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */,
 				17F6A9282266A3C000CBC866 /* HostingView.swift in Sources */,
 				17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */,
 				17F29F1122825CFC009F5121 /* HostingCollectionViewCell.swift in Sources */,

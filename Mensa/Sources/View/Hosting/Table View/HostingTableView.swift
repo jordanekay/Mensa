@@ -27,4 +27,12 @@ extension HostingTableView: DataDisplaying {
     func register(_ hostingViewType: HostingView.Type, reuseIdentifier: String) {
         register(hostingViewType, forCellReuseIdentifier: reuseIdentifier)
     }
+    
+    func register(_ headerFooterViewType: HostingHeaderFooterView.Type, reuseIdentifier: String) {
+        register(headerFooterViewType, forHeaderFooterViewReuseIdentifier:  reuseIdentifier)
+    }
+    
+    func register(_ supplementaryViewType: HostingSupplementaryView.Type, reuseIdentifier: String) {
+        return
+    }
 }
