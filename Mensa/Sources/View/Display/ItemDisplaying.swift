@@ -17,10 +17,6 @@ public extension ItemDisplaying {
     static var hasVariableSize: Bool {
         return false
     }
-    
-    func display(_ item: Item) {
-        display(item, with: Self.defaultVariant)
-    }
 }
 
 public extension ItemDisplaying where DisplayVariant: CaseIterable, DisplayVariant.AllCases == [DisplayVariant] {

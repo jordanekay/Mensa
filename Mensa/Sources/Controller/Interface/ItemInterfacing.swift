@@ -9,7 +9,7 @@
 public protocol ItemInterfacing: UIViewController {
     associatedtype View: ItemDisplaying
     
-    func interface(with item: View.Item, displayedWith variant: View.DisplayVariant)
+    func interface(with item: View.Item)
 }
 
 public extension ItemInterfacing {
@@ -17,8 +17,8 @@ public extension ItemInterfacing {
         return view as! View
     }
 
-    func interface(with item: View.Item, displayedWith variant: View.DisplayVariant) {
-        view.display(item, with: variant)
+    func interface(with item: View.Item) {
+        view.display(item)
     }
 }
 

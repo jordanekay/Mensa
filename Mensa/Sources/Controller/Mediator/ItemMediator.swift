@@ -19,7 +19,7 @@ extension ItemMediator {
         interface = {
             let viewController = $0 as! Interface
             let item = $1 as! Interface.View.Item
-            viewController.interface(with: item, displayedWith: displayVariant)
+            viewController.interface(with: item)
         }
         variableSize = {
             let viewController = $0 as! Interface
