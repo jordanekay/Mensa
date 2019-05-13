@@ -10,8 +10,9 @@ public protocol DataInterfacing: UIViewController {
     typealias Item = DataSourceType.Item
     typealias Header = DataSourceType.Header
     
-    associatedtype View: UIView = UIView
     associatedtype DataSourceType: DataSource
+    associatedtype ItemViewType: UIView = UIView
+    associatedtype HeaderViewType: UIView = UIView
     
     var displayContext: DataDisplayContext { get }
     
@@ -19,6 +20,8 @@ public protocol DataInterfacing: UIViewController {
     func displayVariant(for header: Header) -> Variant?
     func prepareAndAddDataView(_ dataView: UIScrollView)
     func supportInterfacingWithData()
+    func handleDisplay(of item: Item, using view: ItemViewType)
+    func handleDisplay(of header: Header, using view: HeaderViewType)
 }
 
 public extension DataInterfacing {
@@ -37,6 +40,14 @@ public extension DataInterfacing {
     
     func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, using interfaceType: Interface.Type) where Item == Interface.View.Item {
         dataMediator.supportInterfacing(with: itemType, using: interfaceType)
+    }
+    
+    func handleDisplay(of item: Item, using view: ItemViewType) {
+        return
+    }
+    
+    func handleDisplay(of header: Header, using view: HeaderViewType) {
+        return
     }
 }
 

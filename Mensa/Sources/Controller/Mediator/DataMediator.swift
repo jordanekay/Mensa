@@ -106,7 +106,7 @@ extension DataMediator {
             let itemTypeVariantIdentifier = ItemTypeVariantIdentifier(itemTypeIdentifier: itemTypeIdentifier, variant: variant)
             
             defaultDisplayVariants[itemTypeIdentifier] = Interface.View.defaultVariant
-            itemMediators[itemTypeVariantIdentifier] = .init(interfaceType: interfaceType, displayVariant: variant)
+            itemMediators[itemTypeVariantIdentifier] = .init(interfaceType: interfaceType, displayVariant: variant, dataInterface: dataInterface)
             viewControllerTypes[itemTypeVariantIdentifier] = interfaceType
         }
     }

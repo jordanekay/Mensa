@@ -17,12 +17,13 @@ protocol HostingView: UIView {
 extension HostingView {
     func hostContent(of type: NibLoadable.Type, from viewController: UIViewController, with variant: Variant, variableSize: Bool) {
         let hostedView = type.hostedView(of: variant)
+        hostedView.backgroundColor = .clear
         hostedView.frame.size.width = contentView.bounds.width
         viewController.view = hostedView
         self.viewController = viewController
 
         contentView.addSubview(hostedView)
-//        addEdgeConstraints(toHostedView: hostedView)
+        addEdgeConstraints(toHostedView: hostedView)
 //        if !variableSize {
 //            addSizeConstraints(toHostedView: hostedView)
 //        }
