@@ -11,20 +11,22 @@ public protocol ItemDisplaying: CustomDisplaying {
     
     static var itemDisplayVariants: [DisplayVariant] { get }
     static var hasVariableSize: Bool { get }
+    
+    func setHighlighted(_ highlighted: Bool, animated: Bool)
 }
 
+// MARK: -
 public extension ItemDisplaying {
     static var hasVariableSize: Bool {
         return false
     }
-}
-
-public extension ItemDisplaying where DisplayVariant: CaseIterable, DisplayVariant.AllCases == [DisplayVariant] {
-    static var itemDisplayVariants: [DisplayVariant] {
-        return DisplayVariant.allCases
+    
+    func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        return
     }
 }
 
+// MARK: -
 public extension ItemDisplaying where DisplayVariant == Invariant {
     static var defaultVariant: Invariant {
         return .init()
@@ -34,3 +36,12 @@ public extension ItemDisplaying where DisplayVariant == Invariant {
         return [.init()]
     }
 }
+
+public extension ItemDisplaying where DisplayVariant: CaseIterable, DisplayVariant.AllCases == [DisplayVariant] {
+    static var itemDisplayVariants: [DisplayVariant] {
+        return DisplayVariant.allCases
+    }
+}
+
+// MARK: -
+extension ItemPosition: Variant {}

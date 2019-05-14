@@ -11,17 +11,17 @@ public protocol DataInterfacing: UIViewController {
     typealias Header = DataSourceType.Header
     
     associatedtype DataSourceType: DataSource
-    associatedtype ItemViewType: UIView = UIView
-    associatedtype HeaderViewType: UIView = UIView
+    associatedtype ItemViewController: ItemInterfacing
+    associatedtype HeaderViewController: ItemInterfacing
     
     var displayContext: DataDisplayContext { get }
     
-    func displayVariant(for item: Item) -> Variant?
+    func displayVariant(for item: Item, at position: ItemPosition) -> Variant?
     func displayVariant(for header: Header) -> Variant?
     func prepareAndAddDataView(_ dataView: UIScrollView)
     func supportInterfacingWithData()
-    func handleDisplay(of item: Item, using view: ItemViewType)
-    func handleDisplay(of header: Header, using view: HeaderViewType)
+    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController, with view: ItemViewController.View)
+    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController, with view: HeaderViewController.View)
 }
 
 public extension DataInterfacing {
@@ -38,26 +38,24 @@ public extension DataInterfacing {
         }
     }
     
-    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, using interfaceType: Interface.Type) where Item == Interface.View.Item {
-        dataMediator.supportInterfacing(with: itemType, using: interfaceType)
-    }
-    
-    func handleDisplay(of item: Item, using view: ItemViewType) {
-        return
-    }
-    
-    func handleDisplay(of header: Header, using view: HeaderViewType) {
-        return
-    }
-}
-
-public extension DataInterfacing {
-    func displayVariant(for item: Item) -> Variant? {
+    func displayVariant(for item: Item, at position: ItemPosition) -> Variant? {
         return nil
     }
     
     func displayVariant(for header: Header) -> Variant? {
         return nil
+    }
+    
+    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, using interfaceType: Interface.Type) where Item == Interface.View.Item {
+        dataMediator.supportInterfacing(with: itemType, using: interfaceType)
+    }
+    
+    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController, with view: ItemViewController.View) {
+        return  
+    }
+    
+    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController, with view: HeaderViewController.View) {
+        return
     }
 }
 

@@ -11,6 +11,9 @@
 		176A2549226E93100064488F /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A2544226E92990064488F /* Identifier.swift */; };
 		176A254A226E93100064488F /* ItemTypeIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A2547226E93040064488F /* ItemTypeIdentifier.swift */; };
 		176A254F226E967A0064488F /* ItemTypeVariantIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */; };
+		17700131228B1BDB006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
+		17700132228B1C99006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
+		17700133228B1CA5006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
 		17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
 		17D4F2362283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
 		17D4F27A2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */; };
@@ -55,6 +58,7 @@
 		176A2544226E92990064488F /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		176A2547226E93040064488F /* ItemTypeIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeIdentifier.swift; sourceTree = "<group>"; };
 		176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeVariantIdentifier.swift; sourceTree = "<group>"; };
+		17700130228B1BDB006EB3FD /* ItemPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPosition.swift; sourceTree = "<group>"; };
 		1772ABBA1D188BA0007DC99F /* Mensa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mensa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1772ABBF1D188BA0007DC99F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17D4F2342283720D00FDD335 /* DataDisplayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayContext.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			children = (
 				17DFC9E3225E6D4200871C7D /* Section.swift */,
 				17DFCA5B22669F7900871C7D /* SectionIndexPath.swift */,
+				17700130228B1BDB006EB3FD /* ItemPosition.swift */,
 				172766172255983600C11D4A /* DataSource.swift */,
 				17DFC9E5225E6D8200871C7D /* SingleSectionDataSource.swift */,
 			);
@@ -438,6 +443,7 @@
 				17DFC9E4225E6D4200871C7D /* Section.swift in Sources */,
 				17DFCA5C22669F7900871C7D /* SectionIndexPath.swift in Sources */,
 				172766182255983600C11D4A /* DataSource.swift in Sources */,
+				17700131228B1BDB006EB3FD /* ItemPosition.swift in Sources */,
 				17DFC9E6225E6D8200871C7D /* SingleSectionDataSource.swift in Sources */,
 				17DFCA5A2266958800871C7D /* Model.swift in Sources */,
 			);
@@ -456,6 +462,7 @@
 				17DFCA2D225EDA8900871C7D /* DataMediator.swift in Sources */,
 				17F6A92C2266A3C100CBC866 /* HostingTableView.swift in Sources */,
 				17D4F2362283720D00FDD335 /* DataDisplayContext.swift in Sources */,
+				17700133228B1CA5006EB3FD /* ItemPosition.swift in Sources */,
 				17D4F2812285E8F200FDD335 /* ReusableView.swift in Sources */,
 				17D4F27B2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */,
 				17DFC9FB225E7F3600871C7D /* DataSource.swift in Sources */,
@@ -487,6 +494,7 @@
 				17F6A9282266A3C000CBC866 /* HostingView.swift in Sources */,
 				17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */,
 				17F29F1122825CFC009F5121 /* HostingCollectionViewCell.swift in Sources */,
+				17700132228B1C99006EB3FD /* ItemPosition.swift in Sources */,
 				17F6A9292266A3C000CBC866 /* HostingTableView.swift in Sources */,
 				17F80310225594A300212525 /* View.swift in Sources */,
 			);

@@ -76,6 +76,30 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     }
     
     // MARK: UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
+        return itemMediator.shouldSelect(viewController, item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
+        itemMediator.select(viewController, item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let (viewController, itemMediator, _) = viewControllerInfo(for: indexPath, in: collectionView)
+        let highlighted = true
+        let animated = false
+        itemMediator.highlight(viewController, highlighted, animated)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        let (viewController, itemMediator, _) = viewControllerInfo(for: indexPath, in: collectionView)
+        let highlighted = false
+        let animated = !collectionView.isDragging
+        itemMediator.highlight(viewController, highlighted, animated)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         guard let (identifier, itemMediator, _) = headerInfo(for: section) else { return .zero }
         
@@ -128,7 +152,9 @@ private extension DataMediator {
         let item = dataSource!.item(at: indexPath)
         let itemType = type(of: item)
         let itemTypeIdentifier = ItemTypeIdentifier(itemType: itemType)
-        let displayVariant = dataInterface.displayVariant(for: item) ?? defaultDisplayVariants[itemTypeIdentifier] ?? Invariant()
+        let itemCount = self.itemCount(forSection: indexPath.section)
+        let itemPosition = ItemPosition(indexPath: indexPath, itemCount: itemCount)
+        let displayVariant = dataInterface.displayVariant(for: item, at: itemPosition) ?? defaultDisplayVariants[itemTypeIdentifier] ?? Invariant()
         let itemTypeVariantIdentifier = ItemTypeVariantIdentifier(itemTypeIdentifier: itemTypeIdentifier, variant: displayVariant)
         let itemMediator = itemMediators[itemTypeVariantIdentifier]!
         return (itemTypeVariantIdentifier, itemMediator, item)
@@ -143,6 +169,20 @@ private extension DataMediator {
         let itemTypeVariantIdentifier = ItemTypeVariantIdentifier(itemTypeIdentifier: itemTypeIdentifier, variant: displayVariant)
         let itemMediator = itemMediators[itemTypeVariantIdentifier]!
         return (itemTypeVariantIdentifier, itemMediator, header)
+    }
+
+    func viewControllerInfo(for indexPath: IndexPath, in tableView: UITableView) -> (UIViewController, ItemMediator, Item) {
+        let (_, itemMediator, item) = info(for: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) as! HostingView
+        let viewController = cell.viewController!
+        return (viewController, itemMediator, item)
+    }
+    
+    func viewControllerInfo(for indexPath: IndexPath, in collectionView: UICollectionView) -> (UIViewController, ItemMediator, Item) {
+        let (_, itemMediator, item) = info(for: indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as! HostingView
+        let viewController = cell.viewController!
+        return (viewController, itemMediator, item)
     }
     
     func viewType(for viewControllerType: UIViewController.Type) -> NibLoadable.Type {
