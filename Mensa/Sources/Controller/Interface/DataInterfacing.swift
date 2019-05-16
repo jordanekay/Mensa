@@ -46,8 +46,14 @@ public extension DataInterfacing {
         return nil
     }
     
-    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, using interfaceType: Interface.Type) where Item == Interface.View.Item {
-        dataMediator.supportInterfacing(with: itemType, using: interfaceType)
+    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, conformedToBy conformingTypes: Any.Type..., using interfaceType: Interface.Type) where Item == Interface.View.Item {
+        if conformingTypes.count > 0 {
+            conformingTypes.forEach {
+                dataMediator.supportInterfacing(with: $0, using: interfaceType)
+            }
+        } else {
+            dataMediator.supportInterfacing(with: itemType, using: interfaceType)
+        }
     }
     
     func handleDisplayingItem(_ item: Item, using viewController: ItemViewController, with view: ItemViewController.View) {

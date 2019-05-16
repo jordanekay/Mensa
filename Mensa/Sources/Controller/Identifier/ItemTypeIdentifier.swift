@@ -9,7 +9,7 @@
 struct ItemTypeIdentifier {
     let value: String
     
-    init<Item>(itemType: Item.Type) {
+    init(itemType: Any.Type) {
         value = String(describing: itemType)
     }
 }

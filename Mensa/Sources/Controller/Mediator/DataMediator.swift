@@ -123,7 +123,7 @@ extension DataMediator {
         return Array(viewControllerTypes.keys)
     }
     
-    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, using interfaceType: Interface.Type) where Item == Interface.View.Item {
+    func supportInterfacing<Interface: ItemInterfacing>(with itemType: Any.Type, using interfaceType: Interface.Type) {
         let variants = Interface.View.itemDisplayVariants
         for variant in variants {
             let itemTypeIdentifier = ItemTypeIdentifier(itemType: itemType)
