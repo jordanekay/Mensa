@@ -9,4 +9,5 @@
 protocol SectionIndexPath {
     var section: Int { get }
     var row: Int { get }
+    var item: Int { get }
 }

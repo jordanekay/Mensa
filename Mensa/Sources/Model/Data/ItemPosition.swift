@@ -15,7 +15,7 @@ public enum ItemPosition: String {
 
 // MARK: -
 extension ItemPosition {
-    init(indexPath: IndexPath, itemCount: Int) {
+    init(indexPath: SectionIndexPath, itemCount: Int) {
         switch indexPath.item {
         case 0:
             self = (itemCount == 1) ? .lone : .top
