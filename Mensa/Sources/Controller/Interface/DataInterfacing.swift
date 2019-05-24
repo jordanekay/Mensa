@@ -25,10 +25,12 @@ public protocol DataInterfacing: UIViewController {
 }
 
 public extension DataInterfacing {
-    func useData(from dataSource: DataSourceType) {
+    func useData(from dataSource: DataSourceType, reload: Bool = true) {
         if let dataView = dataView {
             dataMediator.dataSource = dataSource
-            dataView.reloadData()
+            if reload {
+                dataView.reloadData()
+            }
         } else {
             setupDataView()
             supportInterfacingWithData()
