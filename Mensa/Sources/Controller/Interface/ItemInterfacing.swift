@@ -10,8 +10,11 @@ public protocol ItemInterfacing: UIViewController {
     associatedtype View: ItemDisplaying
     
     func interface(with item: View.Item)
+    func set(_ item: View.Item, selected: Bool)
     func select(_ item: View.Item)
+    func deselect(_ item: View.Item)
     func shouldSelect(_ item: View.Item) -> Bool
+    func prepareToSelect(_ item: View.Item)
 }
 
 public extension ItemInterfacing {
@@ -23,17 +26,28 @@ public extension ItemInterfacing {
         view.display(item)
     }
     
+    func set(_ item: View.Item, selected: Bool) {
+        if selected {
+            select(item)
+        } else {
+            deselect(item)
+        }
+    }
+    
     func select(_ item: View.Item) {
+        return
+    }
+    
+    func deselect(_ item: View.Item) {
         return
     }
     
     func shouldSelect(_ item: View.Item) -> Bool {
         return true
     }
-}
-
-extension ItemInterfacing {
-    var viewHasVariableSize: Bool {
-        return View.hasVariableSize
+    
+    func prepareToSelect(_ item: View.Item) {
+        return
     }
 }
+

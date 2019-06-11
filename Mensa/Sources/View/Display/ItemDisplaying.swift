@@ -10,17 +10,12 @@ public protocol ItemDisplaying: CustomDisplaying {
     typealias Item = Model
     
     static var itemDisplayVariants: [DisplayVariant] { get }
-    static var hasVariableSize: Bool { get }
     
     func setHighlighted(_ highlighted: Bool, animated: Bool)
 }
 
 // MARK: -
 public extension ItemDisplaying {
-    static var hasVariableSize: Bool {
-        return false
-    }
-    
     func setHighlighted(_ highlighted: Bool, animated: Bool) {
         return
     }

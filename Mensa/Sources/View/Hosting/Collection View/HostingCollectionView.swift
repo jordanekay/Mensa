@@ -13,6 +13,9 @@ final class HostingCollectionView: UICollectionView {
         retainedDelegate = delegate
         super.init(frame: frame, collectionViewLayout: layout)
         self.delegate = delegate
+        
+        backgroundColor = .clear
+        isPrefetchingEnabled = false
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     

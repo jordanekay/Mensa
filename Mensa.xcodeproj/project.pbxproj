@@ -14,6 +14,14 @@
 		17700131228B1BDB006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
 		17700132228B1C99006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
 		17700133228B1CA5006EB3FD /* ItemPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17700130228B1BDB006EB3FD /* ItemPosition.swift */; };
+		17718EFC22A834B3004351DE /* ScrollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718EFA22A834B3004351DE /* ScrollEvent.swift */; };
+		17718EFD22A834BE004351DE /* ScrollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718EFA22A834B3004351DE /* ScrollEvent.swift */; };
+		17718F0822A855E9004351DE /* MutableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F0722A855E9004351DE /* MutableDataSource.swift */; };
+		17718F0A22A8563C004351DE /* MutableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F0722A855E9004351DE /* MutableDataSource.swift */; };
+		17718F0C22A857F2004351DE /* MutableSingleSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F0B22A857F2004351DE /* MutableSingleSectionDataSource.swift */; };
+		17718F0D22A857F2004351DE /* MutableSingleSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F0B22A857F2004351DE /* MutableSingleSectionDataSource.swift */; };
+		17718F6422AB2685004351DE /* HostingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F6322AB2685004351DE /* HostingStrategy.swift */; };
+		17718F6522AB2685004351DE /* HostingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17718F6322AB2685004351DE /* HostingStrategy.swift */; };
 		17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
 		17D4F2362283720D00FDD335 /* DataDisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2342283720D00FDD335 /* DataDisplayContext.swift */; };
 		17D4F27A2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4F2792285E38700FDD335 /* HostingHeaderFooterView.swift */; };
@@ -59,6 +67,10 @@
 		176A2547226E93040064488F /* ItemTypeIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeIdentifier.swift; sourceTree = "<group>"; };
 		176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeVariantIdentifier.swift; sourceTree = "<group>"; };
 		17700130228B1BDB006EB3FD /* ItemPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPosition.swift; sourceTree = "<group>"; };
+		17718EFA22A834B3004351DE /* ScrollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollEvent.swift; sourceTree = "<group>"; };
+		17718F0722A855E9004351DE /* MutableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableDataSource.swift; sourceTree = "<group>"; };
+		17718F0B22A857F2004351DE /* MutableSingleSectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableSingleSectionDataSource.swift; sourceTree = "<group>"; };
+		17718F6322AB2685004351DE /* HostingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingStrategy.swift; sourceTree = "<group>"; };
 		1772ABBA1D188BA0007DC99F /* Mensa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mensa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1772ABBF1D188BA0007DC99F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17D4F2342283720D00FDD335 /* DataDisplayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayContext.swift; sourceTree = "<group>"; };
@@ -138,6 +150,14 @@
 			path = Identifier;
 			sourceTree = "<group>";
 		};
+		17718EF922A8349D004351DE /* Scrolling */ = {
+			isa = PBXGroup;
+			children = (
+				17718EFA22A834B3004351DE /* ScrollEvent.swift */,
+			);
+			path = Scrolling;
+			sourceTree = "<group>";
+		};
 		1772ABB01D188BA0007DC99F = {
 			isa = PBXGroup;
 			children = (
@@ -181,7 +201,9 @@
 				17DFCA5B22669F7900871C7D /* SectionIndexPath.swift */,
 				17700130228B1BDB006EB3FD /* ItemPosition.swift */,
 				172766172255983600C11D4A /* DataSource.swift */,
+				17718F0722A855E9004351DE /* MutableDataSource.swift */,
 				17DFC9E5225E6D8200871C7D /* SingleSectionDataSource.swift */,
+				17718F0B22A857F2004351DE /* MutableSingleSectionDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -209,6 +231,7 @@
 			children = (
 				17DFCA23225ED97B00871C7D /* Hosting */,
 				17DFCA0F225EB99500871C7D /* Display */,
+				17718EF922A8349D004351DE /* Scrolling */,
 				17D4F2782285E37500FDD335 /* Reusable */,
 			);
 			path = View;
@@ -246,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				17DFCA28225ED9C600871C7D /* HostingView.swift */,
+				17718F6322AB2685004351DE /* HostingStrategy.swift */,
 				17F29F0922825CB1009F5121 /* Table View */,
 				17F29F0A22825CB7009F5121 /* Collection View */,
 			);
@@ -443,9 +467,11 @@
 				17DFC9E4225E6D4200871C7D /* Section.swift in Sources */,
 				17DFCA5C22669F7900871C7D /* SectionIndexPath.swift in Sources */,
 				172766182255983600C11D4A /* DataSource.swift in Sources */,
+				17718F0C22A857F2004351DE /* MutableSingleSectionDataSource.swift in Sources */,
 				17700131228B1BDB006EB3FD /* ItemPosition.swift in Sources */,
 				17DFC9E6225E6D8200871C7D /* SingleSectionDataSource.swift in Sources */,
 				17DFCA5A2266958800871C7D /* Model.swift in Sources */,
+				17718F0822A855E9004351DE /* MutableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +481,7 @@
 			files = (
 				17F29F1222825CFC009F5121 /* HostingCollectionViewCell.swift in Sources */,
 				17F6A92B2266A3C100CBC866 /* HostingView.swift in Sources */,
+				17718EFD22A834BE004351DE /* ScrollEvent.swift in Sources */,
 				176A254F226E967A0064488F /* ItemTypeVariantIdentifier.swift in Sources */,
 				176A2549226E93100064488F /* Identifier.swift in Sources */,
 				17F29F0D22825CF0009F5121 /* HostingCollectionView.swift in Sources */,
@@ -470,12 +497,15 @@
 				176A254A226E93100064488F /* ItemTypeIdentifier.swift in Sources */,
 				17DFCA1F225ECEA100871C7D /* DataDisplaying.swift in Sources */,
 				17DFC9F8225E7F2E00871C7D /* Controller.swift in Sources */,
+				17718F0D22A857F2004351DE /* MutableSingleSectionDataSource.swift in Sources */,
 				17DFCA5D22669FB400871C7D /* SectionIndexPath.swift in Sources */,
 				17D4F27E2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */,
 				17F6A92D2266A3C100CBC866 /* HostingTableViewCell.swift in Sources */,
 				17DFCA442261166100871C7D /* DataInterfacing.swift in Sources */,
 				17DFC9FC225E7F3600871C7D /* SingleSectionDataSource.swift in Sources */,
+				17718F0A22A8563C004351DE /* MutableDataSource.swift in Sources */,
 				17DFC9FA225E7F3600871C7D /* Section.swift in Sources */,
+				17718F6522AB2685004351DE /* HostingStrategy.swift in Sources */,
 				17DFCA05225EA9B100871C7D /* ItemInterfacing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,8 +519,10 @@
 				17D4F27A2285E38700FDD335 /* HostingHeaderFooterView.swift in Sources */,
 				17D4F2802285E8F200FDD335 /* ReusableView.swift in Sources */,
 				17DFCA1D225ECE3A00871C7D /* DataDisplaying.swift in Sources */,
+				17718F6422AB2685004351DE /* HostingStrategy.swift in Sources */,
 				17DFCA02225EA56A00871C7D /* ItemDisplaying.swift in Sources */,
 				17D4F27D2285E39500FDD335 /* HostingSupplementaryView.swift in Sources */,
+				17718EFC22A834B3004351DE /* ScrollEvent.swift in Sources */,
 				17F6A9282266A3C000CBC866 /* HostingView.swift in Sources */,
 				17D4F2352283720D00FDD335 /* DataDisplayContext.swift in Sources */,
 				17F29F1122825CFC009F5121 /* HostingCollectionViewCell.swift in Sources */,

@@ -8,8 +8,7 @@
 
 public struct Section<Item, Header> {
     let header: Header?
-    
-    private let items: [Item]
+    var items: [Item]
     
     public init(header: Header? = nil, items: [Item]) {
         self.items = items
@@ -24,6 +23,11 @@ extension Section {
     }
     
     subscript(index: Int) -> Item {
-        return items[index]
+        get {
+            return items[index]
+        }
+        set {
+            items[index] = newValue
+        }
     }
 }

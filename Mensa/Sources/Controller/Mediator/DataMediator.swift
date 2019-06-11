@@ -11,7 +11,8 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     typealias Header = DataInterface.DataSourceType.Header
     
     var dataSource: DataInterface.DataSourceType?
-
+    var selectedIndexPath: IndexPath?
+    
     private var defaultDisplayVariants: [ItemTypeIdentifier: Variant] = [:]
     private var itemMediators: [ItemTypeVariantIdentifier: ItemMediator] = [:]
     private var viewControllerTypes: [ItemTypeVariantIdentifier: UIViewController.Type] = [:]
@@ -22,6 +23,24 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     
     init(dataInterface: DataInterface) {
         self.dataInterface = dataInterface
+    }
+    
+    // MARK: UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dataInterface.handle(.didScroll, for: scrollView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let scrollEvent = ScrollEvent.willEndDragging(velocity: velocity, targetContentOffset: targetContentOffset.pointee)
+        dataInterface.handle(scrollEvent, for: scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        dataInterface.handle(.didEndDecelerating, for: scrollView)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        dataInterface.handle(.didEndScrollingAnimation, for: scrollView)
     }
     
     // MARK: UITableViewDataSource
@@ -76,20 +95,19 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     }
     
     // MARK: UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
-        return itemMediator.shouldSelect(viewController, item)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
-        itemMediator.select(viewController, item)
+        
+        itemMediator.prepareToSelect(viewController, item)
+        selectedIndexPath = indexPath
+        itemMediator.setSelected(viewController, item, true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let (viewController, itemMediator, _) = viewControllerInfo(for: indexPath, in: collectionView)
         let highlighted = true
         let animated = false
+        
         itemMediator.highlight(viewController, highlighted, animated)
     }
     
@@ -97,6 +115,7 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
         let (viewController, itemMediator, _) = viewControllerInfo(for: indexPath, in: collectionView)
         let highlighted = false
         let animated = !collectionView.isDragging
+        
         itemMediator.highlight(viewController, highlighted, animated)
     }
     
@@ -150,7 +169,7 @@ private extension DataMediator {
     
     func info(for indexPath: IndexPath) -> (ItemTypeVariantIdentifier, ItemMediator, Item) {
         let item = dataSource!.item(at: indexPath)
-        let itemType = type(of: item)
+        let itemType = type(of: item as Any)
         let itemTypeIdentifier = ItemTypeIdentifier(itemType: itemType)
         let itemCount = self.itemCount(forSection: indexPath.section)
         let itemPosition = ItemPosition(indexPath: indexPath, itemCount: itemCount)
@@ -205,9 +224,8 @@ private extension DataMediator {
         let hostingViewController = dataInterface as UIViewController
         let mediator = itemMediators[identifier]!
         let displayVariant = mediator.displayVariant
-        let variableSize = mediator.variableSize(viewController)
         
-        hostingView.hostContent(of: viewType, from: viewController, with: displayVariant, variableSize: variableSize)
+        hostingView.hostContent(of: viewType, from: viewController, with: displayVariant)
         hostingViewController.addChild(viewController)
         viewController.didMove(toParent: hostingViewController)
 
@@ -217,3 +235,7 @@ private extension DataMediator {
 
 // MARK: -
 extension IndexPath: SectionIndexPath {}
+
+private extension CGSize {
+    static let defaultItemSize: CGSize = .init(width: 50, height: 50)
+}

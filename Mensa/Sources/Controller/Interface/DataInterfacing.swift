@@ -6,13 +6,13 @@
 //  Copyright © 2019 CultivR. All rights reserved.
 //
 
-public protocol DataInterfacing: UIViewController {
+public protocol DataInterfacing: UIViewController, UIScrollViewDelegate {
     typealias Item = DataSourceType.Item
     typealias Header = DataSourceType.Header
     
     associatedtype DataSourceType: DataSource
-    associatedtype ItemViewController: ItemInterfacing
-    associatedtype HeaderViewController: ItemInterfacing
+    associatedtype ItemViewController: UIViewController = UIViewController
+    associatedtype HeaderViewController: UIViewController = UIViewController
     
     var displayContext: DataDisplayContext { get }
     
@@ -20,11 +20,24 @@ public protocol DataInterfacing: UIViewController {
     func displayVariant(for header: Header) -> Variant?
     func prepareAndAddDataView(_ dataView: UIScrollView)
     func supportInterfacingWithData()
-    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController, with view: ItemViewController.View)
-    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController, with view: HeaderViewController.View)
+    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController)
+    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController)
+    func handle(_ scrollEvent: ScrollEvent, for scrollView: UIScrollView)
 }
 
 public extension DataInterfacing {
+    var dataSource: DataSourceType? {
+        return dataMediator?.dataSource
+    }
+    
+    var scrollView: UIScrollView? {
+        return dataView
+    }
+    
+    var selectedItem: Item? {
+        return dataMediator?.selectedIndexPath.flatMap { dataSource?.item(at: $0) }
+    }
+    
     func useData(from dataSource: DataSourceType, reload: Bool = true) {
         if let dataView = dataView {
             dataMediator.dataSource = dataSource
@@ -40,6 +53,7 @@ public extension DataInterfacing {
         }
     }
     
+    // MARK: DataInterfacing
     func displayVariant(for item: Item, at position: ItemPosition) -> Variant? {
         return nil
     }
@@ -48,7 +62,12 @@ public extension DataInterfacing {
         return nil
     }
     
-    func supportInterfacing<Item, Interface: ItemInterfacing>(with itemType: Item.Type, conformedToBy conformingTypes: Any.Type..., using interfaceType: Interface.Type) where Item == Interface.View.Item {
+    func prepareAndAddDataView(_ dataView: UIScrollView) {
+        dataView.alwaysBounceVertical = true
+        view.addSubview(dataView)
+    }
+    
+    func supportInterfacing<Interface: ItemInterfacing>(with itemType: Interface.View.Item.Type, conformedToBy conformingTypes: Any.Type..., using interfaceType: Interface.Type) {
         if conformingTypes.count > 0 {
             conformingTypes.forEach {
                 dataMediator.supportInterfacing(with: $0, using: interfaceType)
@@ -58,12 +77,50 @@ public extension DataInterfacing {
         }
     }
     
-    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController, with view: ItemViewController.View) {
+    func handleDisplayingItem(_ item: Item, using viewController: ItemViewController) {
         return  
     }
     
-    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController, with view: HeaderViewController.View) {
+    func handleDisplayingHeader(_ header: Header, using viewController: HeaderViewController) {
         return
+    }
+    
+    func handle(_ scrollEvent: ScrollEvent, for scrollView: UIScrollView) {
+        return
+    }
+}
+
+public extension DataInterfacing where Item: Equatable {
+    func select(_ item: Item) {
+        guard let indexPath = dataSource?.indexPath(for: item) else { return }
+        
+        dataMediator?.selectedIndexPath = indexPath
+    }
+    
+    func select(_ item: Item, scrollPosition: UICollectionView.ScrollPosition, animated: Bool)  {
+        guard let indexPath = dataSource?.indexPath(for: item) else { return }
+        
+        position(item, at: scrollPosition, animated: animated)
+        dataMediator?.selectedIndexPath = indexPath
+    }
+
+    func position(_ item: Item, at scrollPosition: UICollectionView.ScrollPosition, animated: Bool) {
+        guard let indexPath = dataSource?.indexPath(for: item), let collectionView = collectionView else { return }
+        
+        collectionView.scrollToItem(at: indexPath, at: scrollPosition, animated: animated)
+    }
+}
+
+public extension DataInterfacing where DataSourceType: MutableDataSource {
+    func replace(_ item: Item, with replacementItem: Item) {
+        guard let indexPath = dataSource?.indexPath(for: item) else { return }
+
+        dataMediator?.dataSource?.setItem(replacementItem, at: indexPath)
+        if let collectionView = collectionView {
+            UIView.performWithoutAnimation {
+                collectionView.reloadItems(at: [indexPath])
+            }
+        }
     }
 }
 
@@ -77,10 +134,18 @@ private extension DataInterfacing {
         }
     }
     
-    var dataMediator: DataMediator<Self>! {
-        return (dataView as? UITableView)?.delegate as? DataMediator<Self> ?? (dataView as? UICollectionView)?.delegate as? DataMediator<Self>
+    var tableView: UITableView? {
+        return dataView as? UITableView
     }
     
+    var collectionView: UICollectionView? {
+        return dataView as? UICollectionView
+    }
+    
+    var dataMediator: DataMediator<Self>! {
+        return tableView?.delegate as? DataMediator<Self> ?? collectionView?.delegate as? DataMediator<Self>
+    }
+
     func setupDataView() {
         let dataMediator = DataMediator(dataInterface: self)
         
@@ -101,7 +166,6 @@ private extension DataInterfacing {
     
     func setupCollectionViewWith(dataMediator: DataMediator<Self>, layout: UICollectionViewLayout) {
         let collectionView = HostingCollectionView(frame: view.bounds, layout: layout, delegate: dataMediator)
-        collectionView.backgroundColor = .clear
         collectionView.dataSource = dataMediator
         dataView = collectionView
         prepareAndAddDataView(collectionView)

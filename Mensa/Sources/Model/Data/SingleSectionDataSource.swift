@@ -17,6 +17,11 @@ public extension SingleSectionDataSource {
         return nil
     }
     
+    func item(at index: Int) -> Item? {
+        guard index >= 0, index < items.count else { return nil }
+        return items[index]
+    }
+    
     // MARK: DataSource
     var sections: [Section<Item, Header>] {
         return [.init(header: header, items: items)]

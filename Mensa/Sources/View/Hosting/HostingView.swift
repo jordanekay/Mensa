@@ -15,18 +15,16 @@ protocol HostingView: UIView {
 
 // MARK: -
 extension HostingView {
-    func hostContent(of type: NibLoadable.Type, from viewController: UIViewController, with variant: Variant, variableSize: Bool) {
+    func hostContent(of type: NibLoadable.Type, from viewController: UIViewController, with variant: Variant) {
         let hostedView = type.hostedView(of: variant)
         hostedView.backgroundColor = .clear
         hostedView.frame.size.width = contentView.bounds.width
         viewController.view = hostedView
+        viewController.viewDidLoad()
         self.viewController = viewController
 
         contentView.addSubview(hostedView)
         addEdgeConstraints(toHostedView: hostedView)
-//        if !variableSize {
-//            addSizeConstraints(toHostedView: hostedView)
-//        }
     }
 }
 
@@ -40,5 +38,20 @@ private extension HostingView {
             }
             contentView.addConstraint(constraint)
         }
-    }    
+    }
+    
+    func addPinConstraints(withWidth width: CGFloat, toHostedView hostedView: UIView) {
+        let widthConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: width)
+        let heightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: bounds.height)
+        addConstraint(widthConstraint)
+        addConstraint(heightConstraint)
+
+        for attribute: NSLayoutConstraint.Attribute in [.top, .bottom,] {
+            let constraint = NSLayoutConstraint(item: contentView, attribute: attribute, relatedBy: .equal, toItem: hostedView, attribute: attribute, multiplier: 1, constant: 0)
+            if attribute == .bottom {
+                constraint.priority -= 1
+            }
+            contentView.addConstraint(constraint)
+        }
+    }
 }
