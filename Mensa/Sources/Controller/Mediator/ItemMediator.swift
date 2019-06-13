@@ -24,13 +24,13 @@ extension ItemMediator {
             
             let viewController = $0 as! Interface
             let item = $1 as! Interface.View.Item
-            viewController.interface(with: item)
             
             if let item = item as? DataInterface.Item, let viewController = viewController as? DataInterface.ItemViewController {
                 dataInterface.handleDisplayingItem(item, using: viewController)
             } else if let header = item as? DataInterface.Header, let viewController = viewController as? DataInterface.HeaderViewController {
                 dataInterface.handleDisplayingHeader(header, using: viewController)
             }
+            viewController.interface(with: item)
         }
         setSelected = {
             let viewController = $0 as! Interface
