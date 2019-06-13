@@ -95,6 +95,11 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     }
     
     // MARK: UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
+        return itemMediator.shouldSelect(viewController, item)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let (viewController, itemMediator, item) = viewControllerInfo(for: indexPath, in: collectionView)
         
