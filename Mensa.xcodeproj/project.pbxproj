@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		172766182255983600C11D4A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172766172255983600C11D4A /* DataSource.swift */; };
+		175D9F5022B4787E000CD2CC /* Mensa.h in Headers */ = {isa = PBXBuildFile; fileRef = 175D9F4F22B4787E000CD2CC /* Mensa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		175D9F5122B4787E000CD2CC /* Mensa.h in Headers */ = {isa = PBXBuildFile; fileRef = 175D9F4F22B4787E000CD2CC /* Mensa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		175D9F5222B4787E000CD2CC /* Mensa.h in Headers */ = {isa = PBXBuildFile; fileRef = 175D9F4F22B4787E000CD2CC /* Mensa.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		176A2549226E93100064488F /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A2544226E92990064488F /* Identifier.swift */; };
 		176A254A226E93100064488F /* ItemTypeIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A2547226E93040064488F /* ItemTypeIdentifier.swift */; };
 		176A254F226E967A0064488F /* ItemTypeVariantIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */; };
@@ -63,6 +66,7 @@
 /* Begin PBXFileReference section */
 		1717B5BC224C479100E2ADF3 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		172766172255983600C11D4A /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		175D9F4F22B4787E000CD2CC /* Mensa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mensa.h; sourceTree = "<group>"; };
 		176A2544226E92990064488F /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		176A2547226E93040064488F /* ItemTypeIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeIdentifier.swift; sourceTree = "<group>"; };
 		176A254B226E93AA0064488F /* ItemTypeVariantIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeVariantIdentifier.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		175B360C1EBD2060004FA581 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				175D9F4F22B4787E000CD2CC /* Mensa.h */,
 				1772ABBF1D188BA0007DC99F /* Info.plist */,
 			);
 			path = Resources;
@@ -313,6 +318,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175D9F5022B4787E000CD2CC /* Mensa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +326,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175D9F5222B4787E000CD2CC /* Mensa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +334,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175D9F5122B4787E000CD2CC /* Mensa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
