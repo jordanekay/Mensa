@@ -22,7 +22,7 @@ public extension MutableSingleSectionDataSource {
     }
     
     // MARK: DataSource
-    var sections: [Section<Item, Header>] {
+    var sections: [SectionType] {
         get {
             return [.init(header: header, items: items)]
         }

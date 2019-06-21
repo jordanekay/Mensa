@@ -7,7 +7,7 @@
 //
 
 public protocol MutableDataSource: DataSource where Item: Equatable {
-    var sections: [Section<Item, Header>] { get set }
+    var sections: [SectionType] { get set }
 }
 
 // MARK: -

@@ -23,7 +23,7 @@ public extension SingleSectionDataSource {
     }
     
     // MARK: DataSource
-    var sections: [Section<Item, Header>] {
+    var sections: [SectionType] {
         return [.init(header: header, items: items)]
     }
 }

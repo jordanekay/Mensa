@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jordan Kay. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Mensa.
 FOUNDATION_EXPORT double MensaVersionNumber;

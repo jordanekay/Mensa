@@ -31,3 +31,10 @@ extension Section {
         }
     }
 }
+
+// MARK: -
+extension Section: ExpressibleByArrayLiteral {
+    public init(arrayLiteral items: Item...) {
+        self.init(items: items)
+    }
+}

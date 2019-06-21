@@ -10,7 +10,9 @@ public protocol DataSource {
     associatedtype Item
     associatedtype Header
     
-    var sections: [Section<Item, Header>] { get }
+    typealias SectionType = Section<Item, Header>
+    
+    var sections: [SectionType] { get }
 }
 
 // MARK: -
