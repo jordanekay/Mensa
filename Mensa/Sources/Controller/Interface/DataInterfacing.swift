@@ -38,7 +38,11 @@ public extension DataInterfacing {
         return dataMediator?.selectedIndexPath.flatMap { dataSource?.item(at: $0) }
     }
     
-    func useData(from dataSource: DataSourceType, reload: Bool = true) {
+    func useData(from dataSource: DataSourceType) {
+        useData(from: dataSource, reload: true)
+    }
+    
+    func useData(from dataSource: DataSourceType, reload: Bool) {
         if let dataView = dataView {
             dataMediator.dataSource = dataSource
             if reload {

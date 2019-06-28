@@ -26,6 +26,10 @@ final class DataMediator<DataInterface: DataInterfacing>: NSObject, UITableViewD
     }
     
     // MARK: UIScrollViewDelegate
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        dataInterface.handle(.willBeginDragging, for: scrollView)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dataInterface.handle(.didScroll, for: scrollView)
     }
